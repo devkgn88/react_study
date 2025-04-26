@@ -310,34 +310,92 @@
 
 // }
 
-import { useState } from "react";
+// import { useState } from "react";
 
-const Viewer = () => {
-    console.log("viewer component update!");
-    return (
-        <div>Viewer</div>
-    );
-}
+// const Viewer = () => {
+//     console.log("viewer component update!");
+//     return (
+//         <div>Viewer</div>
+//     );
+// }
+
+// const Body = () => {
+//     const [number,setNumber] = useState(0);
+//     const onIncrease = () => {
+//         setNumber(number+1);
+//     };
+//     const onDecrease = () => {
+//         setNumber(number-1);
+//     };
+//     return (
+//         <div>
+//             <h2>{number}</h2>
+//             <Viewer number={number}/>
+//             <div>
+//                 <button onClick={onDecrease}>-</button>
+//                 <button onClick={onIncrease}>+</button>
+//             </div>
+//         </div>
+//     );    
+
+// }
+
+// import {useState} from 'react';
+
+// const Body = () => {
+//     const [text, setText] = useState("");
+//     const handleOnChange = (e)=>{
+//         setText(e.target.value);
+//     }
+//     const handleOnClick = (e) =>{
+//         alert(text);
+//     }
+//     return (
+//         <div>
+//             <input value={text}
+//             onChange={handleOnChange}/>
+//             <button
+//             onClick={handleOnClick}
+//             >작성완료</button>
+//         </div>
+//     );
+// }
+
+// export default Body;
+
+import { useRef, useState } from 'react';
 
 const Body = () => {
-    const [number,setNumber] = useState(0);
-    const onIncrease = () => {
-        setNumber(number+1);
-    };
-    const onDecrease = () => {
-        setNumber(number-1);
-    };
-    return (
+    const [text, setText] = useState("");
+    const textRef = useRef();
+
+    const handleOnChange = (e) => {
+        setText(e.target.value);
+    }
+
+    const handleOnClick = () => {
+        // alert(text);
+        // textRef.current.value = ""
+        if(text.length < 5){
+            alert("5자보다 길게 입력하세요!!");
+            textRef.current.focus();
+        } else{
+            alert(text);
+            setText("");
+        }
+    }
+
+    return(
         <div>
-            <h2>{number}</h2>
-            <Viewer number={number}/>
-            <div>
-                <button onClick={onDecrease}>-</button>
-                <button onClick={onIncrease}>+</button>
-            </div>
+            <input
+            ref={textRef}
+            value={text}
+            onChange={handleOnChange}
+            />
+            <button onClick={handleOnClick}>
+                작성 완료
+            </button>
         </div>
-    );    
-
+    );
 }
-
 export default Body;

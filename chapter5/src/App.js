@@ -46,9 +46,7 @@ const App = () => {
   return (
     <div className='App'>
       <Header/>
-      <Body>
-        <ChilComp/>
-      </Body>
+      <Body/>
       <Footer/>
     </div>
   );
